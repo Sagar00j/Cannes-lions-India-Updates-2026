@@ -1,0 +1,197 @@
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cannes Lions 2026 — India Tracker</title>
+<meta name="description" content="India's shortlists, agencies &amp; winning work at Cannes Lions 2026.">
+<meta property="og:title" content="Cannes Lions 2026 — India Tracker">
+<meta property="og:description" content="Live tracker of India's shortlists, leading agencies and award-winning work at Cannes Lions 2026.">
+<meta property="og:type" content="website">
+<style>
+:root{--gold:#c9a227;--ink:#0e0e12;--muted:#6b7280;--bg:#f5f5f7;--line:#e5e7eb;--accent:#1a1a2e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.container{max-width:1080px;margin:0 auto;padding:0 20px}
+.hero{background:linear-gradient(135deg,#0e0e12,#1a1a2e);color:#fff;padding:56px 0 40px;text-align:center}
+.kicker{color:var(--gold);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+.hero h1{font-size:2.4rem;margin:8px 0}
+.subtitle{color:#cbd5e1}
+.updated{color:#94a3b8;font-size:.85rem;margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-28px auto 32px;position:relative}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.05)}
+.stat-card span{display:block;font-size:1.8rem;font-weight:800;color:var(--accent)}
+.stat-card label{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
+h2{margin:36px 0 16px;font-size:1.4rem}
+.section-head{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:12px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters select,.filters input{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.9rem}
+.leaderboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.lb-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.lb-row .name{font-weight:700}
+.lb-row .count{background:var(--gold);color:#fff;border-radius:20px;padding:3px 12px;font-weight:700;font-size:.85rem}
+.entries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.badge{align-self:flex-start;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 10px;border-radius:20px}
+.badge.shortlist{background:#eef2ff;color:#3730a3}
+.badge.bronze{background:#fbe8d3;color:#92400e}
+.badge.silver{background:#e5e7eb;color:#374151}
+.badge.gold{background:#fef3c7;color:#92590e}
+.badge.grand_prix{background:#fde2e4;color:#9d174d}
+.card h3{font-size:1.1rem}
+.card .meta{color:var(--muted);font-size:.88rem}
+.card .agency{font-weight:600}
+.card .cat{font-size:.8rem;color:var(--accent);background:#f1f5f9;padding:2px 8px;border-radius:6px;align-self:flex-start}
+.card a.work{margin-top:auto;color:var(--accent);font-weight:600;text-decoration:none}
+.card a.work:hover{text-decoration:underline}
+.news-feed{display:flex;flex-direction:column;gap:12px}
+.news-item{background:#fff;border-left:4px solid var(--gold);border-radius:10px;padding:14px 18px}
+.news-item time{color:var(--muted);font-size:.8rem}
+.news-item h4{margin:4px 0}
+footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:1.8rem}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="container">
+    <p class="kicker">🇮🇳 Live Tracker</p>
+    <h1>Cannes Lions 2026 — India</h1>
+    <p class="subtitle">Shortlists · Agencies · Winning work · Festival week June 22–26</p>
+    <p id="last-updated" class="updated"></p>
+  </div>
+</header>
+
+<section class="stats container">
+  <div class="stat-card"><span id="stat-shortlists">–</span><label>Shortlists</label></div>
+  <div class="stat-card"><span id="stat-wins">–</span><label>Wins</label></div>
+  <div class="stat-card"><span id="stat-agencies">–</span><label>Agencies</label></div>
+  <div class="stat-card"><span id="stat-leader">–</span><label>Leading Agency</label></div>
+</section>
+
+<main class="container">
+  <section>
+    <h2>Agency Leaderboard</h2>
+    <div id="leaderboard" class="leaderboard"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>All Entries</h2>
+      <div class="filters">
+        <select id="filter-category"><option value="">All Categories</option></select>
+        <select id="filter-status">
+          <option value="">All Statuses</option>
+          <option value="shortlist">Shortlist</option>
+          <option value="bronze">Bronze</option>
+          <option value="silver">Silver</option>
+          <option value="gold">Gold</option>
+          <option value="grand_prix">Grand Prix</option>
+        </select>
+        <input id="filter-search" type="search" placeholder="Search campaign, brand, agency…">
+      </div>
+    </div>
+    <div id="entries" class="entries-grid"></div>
+  </section>
+
+  <section>
+    <h2>Latest Updates</h2>
+    <div id="news" class="news-feed"></div>
+  </section>
+</main>
+
+<footer class="container">
+  <p>Tracking Indian creativity at Cannes Lions 2026 · Editorial/manually verified.</p>
+</footer>
+
+<script>
+/* ====== EDIT ONLY THIS DATA BLOCK TO UPDATE THE SITE ====== */
+const DATA = {
+  lastUpdated: "2026-06-20",
+  news: [
+    { date:"2026-06-20", title:"India secures 8 shortlists in second wave",
+      body:"Shortlists across Health & Wellness, Audio & Radio, Creative Brand, Print & Publishing and Pharma. Ogilvy India leads with 2." },
+    { date:"2026-06-11", title:"Subdued start for India",
+      body:"India drew a blank in the opening Titanium, Glass and Innovation Lions shortlists." }
+  ],
+  entries: [
+    { campaign:"Renu vs The City", brand:"St. Jude India Childcare Centres", agency:"Ogilvy India, Mumbai",
+      category:"Health & Wellness", subcategory:"Film Craft – Non-profit Advocacy", status:"shortlist", workLink:"" },
+    { campaign:"Ek Tara Project", brand:"Titan Eye+", agency:"Ogilvy India, Bangalore",
+      category:"Health & Wellness", subcategory:"Brand Experience & Activation", status:"shortlist", workLink:"" },
+    { campaign:"Project Golden Minute", brand:"Johnson's Baby", agency:"McCann India, Mumbai",
+      category:"Health & Wellness", subcategory:"Direct – Education & Awareness", status:"shortlist", workLink:"" },
+    { campaign:"Indianis Dentris", brand:"Colgate", agency:"The Refinery / Brand David, Mumbai",
+      category:"Health & Wellness", subcategory:"Industry Craft: Photography", status:"shortlist", workLink:"" },
+    { campaign:"The Unofficial Official Sound of F1", brand:"Sting", agency:"Leo India",
+      category:"Audio & Radio", subcategory:"Challenger Brand", status:"shortlist", workLink:"" },
+    { campaign:"From a Sanitary Pad to a Basic Right", brand:"Whisper", agency:"P&G Whisper",
+      category:"Creative Brand", subcategory:"Brand Positioning", status:"shortlist", workLink:"" },
+    { campaign:"The Kolhapuri", brand:"Kalapuri", agency:"VML India",
+      category:"Print & Publishing", subcategory:"Publications for Good", status:"shortlist", workLink:"" },
+    { campaign:"Sawaal Uthao", brand:"Tata 1mg", agency:"Humour Me",
+      category:"Pharma", subcategory:"Integrated – Disease Awareness", status:"shortlist", workLink:"" }
+  ]
+};
+/* ====== END DATA BLOCK ====== */
+
+const STATUS_RANK={grand_prix:5,gold:4,silver:3,bronze:2,shortlist:1};
+const fmt=d=>new Date(d).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+
+function agencyTally(){
+  const map={};
+  DATA.entries.forEach(e=>{
+    e.agency.split("/").map(a=>a.trim()).forEach(name=>{
+      if(!map[name])map[name]={shortlists:0,wins:0};
+      map[name].shortlists++;
+      if(e.status!=="shortlist")map[name].wins++;
+    });
+  });
+  return Object.entries(map).sort((a,b)=>b[1].shortlists-a[1].shortlists);
+}
+function renderStats(){
+  const wins=DATA.entries.filter(e=>e.status!=="shortlist").length;
+  const ag=agencyTally();
+  document.getElementById("stat-shortlists").textContent=DATA.entries.length;
+  document.getElementById("stat-wins").textContent=wins;
+  document.getElementById("stat-agencies").textContent=ag.length;
+  document.getElementById("stat-leader").textContent=ag.length?ag[0][0].split(",")[0]:"–";
+}
+function renderLeaderboard(){
+  document.getElementById("leaderboard").innerHTML=agencyTally().map(([n,t])=>`
+    <div class="lb-row"><span class="name">${n}</span>
+    <span class="count">${t.shortlists}${t.wins?" · 🏆"+t.wins:""}</span></div>`).join("");
+}
+function buildFilters(){
+  const cats=[...new Set(DATA.entries.map(e=>e.category))].sort();
+  const sel=document.getElementById("filter-category");
+  cats.forEach(c=>sel.innerHTML+=`<option value="${c}">${c}</option>`);
+  ["filter-category","filter-status"].forEach(id=>document.getElementById(id).addEventListener("change",renderEntries));
+  document.getElementById("filter-search").addEventListener("input",renderEntries);
+}
+function renderEntries(){
+  const cat=document.getElementById("filter-category").value;
+  const st=document.getElementById("filter-status").value;
+  const q=document.getElementById("filter-search").value.toLowerCase();
+  const list=DATA.entries
+    .filter(e=>(!cat||e.category===cat)&&(!st||e.status===st))
+    .filter(e=>!q||`${e.campaign} ${e.brand} ${e.agency}`.toLowerCase().includes(q))
+    .sort((a,b)=>STATUS_RANK[b.status]-STATUS_RANK[a.status]);
+  const el=document.getElementById("entries");
+  el.innerHTML=list.length?list.map(e=>`
+    <div class="card">
+      <span class="badge ${e.status}">${e.status.replace("_"," ")}</span>
+      <h3>${e.campaign}</h3>
+      <span class="cat">${e.category}</span>
+      <p class="meta"><span class="agency">${e.agency}</span> · ${e.brand}</p>
+      <p class="meta">${e.subcategory||""}</p>
+      ${e.workLink?`<a class="work" href="${e.workLink}" target="_blank" rel="noopener">▶ View the work →</a>`:""}
+    </div>`).join(""):"<p>No entries match your filters.</p>";
+}
+function renderNews(){
+  document.getElementById("news").innerHTML=(DATA.news||[]).map(n=>`
+    <div class="news-item"><time>${fmt(n.date)}</time><h4>${n.title}</h4><p>${n.body}</p></div>`).join("");
+}
+document.getElementById("last-updated").textContent="Last updated: "+fmt(DATA.lastUpdated);
+buildFilters();renderStats();renderLeaderboard();renderEntries();renderNews();
+</script>
+
+</body></html>
