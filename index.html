@@ -91,7 +91,7 @@ footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
         <input id="filter-search" type="search" placeholder="Search campaign, brand, agency…">
       </div>
     </div>
-    <p class="note"> ▶ Note: "View the work" may open a search or related clip if the exact case film wasn't found. 🔍</p>
+    <p class="note">▶ Note: “View the work” may open a search or related clip if the exact case film wasn’t found. 🔍</p>
     <div id="entries" class="entries-grid"></div>
   </section>
 
@@ -109,10 +109,12 @@ footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
 <script>
 /* ====== EDIT ONLY THIS DATA BLOCK TO UPDATE THE SITE ====== */
 const DATA = {
-  lastUpdated: "2026-06-20",
+  lastUpdated: "2026-06-21",
   news: [
-    { date:"2026-06-20", title:"India secures 8 shortlists in second wave",
-      body:"Shortlists across Health & Wellness, Audio & Radio, Creative Brand, Print & Publishing and Pharma. Ogilvy India leads with 2." },
+    { date:"2026-06-21", title:"India surges to 17 shortlists",
+      body:"9 new shortlists added across Film Craft, Design, Direct and Media. Ogilvy India leads with 4, VML India follows with 3." },
+    { date:"2026-06-20", title:"India secures 8 shortlists in first wave",
+      body:"Shortlists across Health & Wellness, Audio & Radio, Creative Brand, Print & Publishing and Pharma." },
     { date:"2026-06-11", title:"Subdued start for India",
       body:"India drew a blank in the opening Titanium, Glass and Innovation Lions shortlists." }
   ],
@@ -120,9 +122,15 @@ const DATA = {
     { campaign:"Renu vs The City", brand:"St. Jude India Childcare Centres", agency:"Ogilvy India, Mumbai",
       category:"Health & Wellness", subcategory:"Film Craft – Non-profit Advocacy", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=MB-2bbn3xUE" },
+    { campaign:"Renu vs The City", brand:"St. Jude India Childcare Centres", agency:"Ogilvy India, Mumbai",
+      category:"Film Craft", subcategory:"Casting", status:"shortlist",
+      workLink:"https://www.youtube.com/watch?v=MB-2bbn3xUE" },
     { campaign:"Ek Tara Project", brand:"Titan Eye+", agency:"Ogilvy India, Bangalore",
       category:"Health & Wellness", subcategory:"Brand Experience & Activation", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=HhxTgdjCLOo" },
+    { campaign:"Box to Beds", brand:"Amazon", agency:"Ogilvy India, Mumbai",
+      category:"Media", subcategory:"Social Behaviour", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Amazon+Box+to+Beds+Ogilvy" },
     { campaign:"Project Golden Minute", brand:"Johnson's Baby", agency:"McCann India, Mumbai",
       category:"Health & Wellness", subcategory:"Direct – Education & Awareness", status:"shortlist",
       workLink:"https://www.youtube.com/results?search_query=Project+Golden+Minute+Pahila+Saans+Johnsons+Baby" },
@@ -132,15 +140,36 @@ const DATA = {
     { campaign:"The Unofficial Official Sound of F1", brand:"Sting", agency:"Leo India",
       category:"Audio & Radio", subcategory:"Challenger Brand", status:"shortlist",
       workLink:"https://www.youtube.com/results?search_query=Sting+Unofficial+Official+Sound+of+F1+Leo" },
-    { campaign:"From a Sanitary Pad to a Basic Right", brand:"Whisper", agency:"P&G Whisper",
+    { campaign:"From a Sanitary Pad to a Basic Right", brand:"Whisper", agency:"Leo India",
       category:"Creative Brand", subcategory:"Brand Positioning", status:"shortlist",
       workLink:"https://www.youtube.com/results?search_query=Whisper+From+a+Sanitary+Pad+to+a+Basic+Right" },
     { campaign:"The Kolhapuri", brand:"Kalapuri", agency:"VML India",
       category:"Print & Publishing", subcategory:"Publications for Good", status:"shortlist",
       workLink:"https://www.youtube.com/results?search_query=The+Kolhapuri+VML+Kalapuri+book" },
+    { campaign:"The Kolhapuri", brand:"Kalapuri", agency:"VML India",
+      category:"Direct", subcategory:"Use of Print/Outdoor", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=The+Kolhapuri+VML+Kalapuri+book" },
+    { campaign:"The Slooowest Vending Machine in the World", brand:"KitKat", agency:"VML India",
+      category:"Design", subcategory:"Brand Environment & Experience Design", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=KitKat+Slowest+Vending+Machine+VML" },
     { campaign:"Sawaal Uthao", brand:"Tata 1mg", agency:"Humour Me",
       category:"Pharma", subcategory:"Integrated – Disease Awareness", status:"shortlist",
-      workLink:"https://www.youtube.com/watch?v=zeeHd1OzrZo" }
+      workLink:"https://www.youtube.com/watch?v=zeeHd1OzrZo" },
+    { campaign:"Don't Look Up", brand:"Steadfast (Fake Money Detector)", agency:"TBWA\\Lintas, Mumbai",
+      category:"Film Craft", subcategory:"Script", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Steadfast+Dont+Look+Up+TBWA+Lintas" },
+    { campaign:"Jeere Mein Heera", brand:"Rimzim Jeera (Coca-Cola)", agency:"Talented, Bangalore",
+      category:"Film Craft", subcategory:"Use of Licensed/Adapted Music", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Rimzim+Jeere+Mein+Heera+Coca+Cola" },
+    { campaign:"The Art of Survival", brand:"Diageo Godawan", agency:"22Feet India",
+      category:"Design", subcategory:"Packaging Design", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Godawan+The+Art+of+Survival+22Feet" },
+    { campaign:"Blinkstop", brand:"Blinkstop", agency:"82.5 Communications, Mumbai",
+      category:"Direct", subcategory:"Experience Design", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Blinkstop+82.5+Grey" },
+    { campaign:"Vim Ka Mahakadhai Record", brand:"Vim", agency:"Mindshare India",
+      category:"Media", subcategory:"Single Market Campaign", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Vim+Mahakadhai+Record+Mindshare" }
   ]
 };
 /* ====== END DATA BLOCK ====== */
