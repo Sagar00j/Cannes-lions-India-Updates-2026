@@ -23,12 +23,25 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:v
 h2{margin:36px 0 16px;font-size:1.4rem}
 .section-head{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:12px}
 .note{background:#fffbea;border:1px solid #f1e3a8;color:#7c6f2e;border-radius:10px;padding:10px 14px;font-size:.85rem;margin-bottom:14px}
+.scoring{font-size:.8rem;color:var(--muted);margin-bottom:14px;display:flex;gap:14px;flex-wrap:wrap}
+.scoring span{display:inline-flex;align-items:center;gap:5px}
+.dot{width:13px;height:13px;border-radius:50%;display:inline-block}
+.dot.gold{background:#d4af37}.dot.silver{background:#9aa0a6}.dot.bronze{background:#b3712e}.dot.grand_prix{background:#9d174d}.dot.shortlist{background:#cdd5f7}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .filters select,.filters input{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:.9rem}
-.leaderboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.lb-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
-.lb-row .name{font-weight:700}
-.lb-row .count{background:var(--gold);color:#fff;border-radius:20px;padding:3px 12px;font-weight:700;font-size:.85rem}
+.leaderboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.lb-row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lb-left{display:flex;align-items:center;gap:10px;min-width:0}
+.lb-rank{font-weight:800;color:var(--muted);font-size:.85rem;min-width:20px}
+.lb-row .name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-right{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.medal{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 5px;border-radius:50%;font-weight:800;font-size:.78rem;color:#fff}
+.medal.gold{background:#d4af37}
+.medal.silver{background:#9aa0a6}
+.medal.bronze{background:#b3712e}
+.medal.grand_prix{background:#9d174d;border-radius:12px}
+.medal.shortlist{background:#cdd5f7;color:#3730a3}
+.pts{background:var(--accent);color:#fff;border-radius:20px;padding:4px 11px;font-weight:800;font-size:.82rem;margin-left:4px}
 .entries-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px}
 .badge{align-self:flex-start;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 10px;border-radius:20px}
@@ -71,7 +84,14 @@ footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
 
 <main class="container">
   <section>
-    <h2>Agency Leaderboard</h2>
+    <h2>Agency Leaderboard <span style="font-size:.8rem;color:var(--muted);font-weight:400">(ranked by points)</span></h2>
+    <div class="scoring">
+      <span><i class="dot grand_prix"></i> Grand Prix · 10</span>
+      <span><i class="dot gold"></i> Gold · 7</span>
+      <span><i class="dot silver"></i> Silver · 5</span>
+      <span><i class="dot bronze"></i> Bronze · 3</span>
+      <span><i class="dot shortlist"></i> Shortlist · 1</span>
+    </div>
     <div id="leaderboard" class="leaderboard"></div>
   </section>
 
@@ -109,8 +129,10 @@ footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
 <script>
 /* ====== EDIT ONLY THIS DATA BLOCK TO UPDATE THE SITE ====== */
 const DATA = {
-  lastUpdated: "2026-06-22",
+  lastUpdated: "2026-06-23",
   news: [
+    { date:"2026-06-23", title:"India opens with 4 Lions on Day 1 🦁",
+      body:"2 Silver (Indianis Dentris – Brand David & The Refinery; Sound of F1 – Leo India) and 2 Bronze (Renu vs The City – Ogilvy; Sawaal Uthao – Humour Me). Day 2 brings Film Craft & Design." },
     { date:"2026-06-22", title:"India reaches 18 shortlists",
       body:"KitKat's 'The Slooowest Vending Machine in the World' (VML) earns India's only new shortlist, in Brand Experience & Activation." },
     { date:"2026-06-21", title:"India surges to 17 shortlists",
@@ -122,7 +144,7 @@ const DATA = {
   ],
   entries: [
     { campaign:"Renu vs The City", brand:"St. Jude India Childcare Centres", agency:"Ogilvy India, Mumbai",
-      category:"Health & Wellness", subcategory:"Film Craft – Non-profit Advocacy", status:"shortlist",
+      category:"Health & Wellness", subcategory:"Film Craft – Non-profit Advocacy", status:"bronze",
       workLink:"https://www.youtube.com/watch?v=MB-2bbn3xUE" },
     { campaign:"Renu vs The City", brand:"St. Jude India Childcare Centres", agency:"Ogilvy India, Mumbai",
       category:"Film Craft", subcategory:"Casting", status:"shortlist",
@@ -136,11 +158,11 @@ const DATA = {
     { campaign:"Project Golden Minute", brand:"Johnson's Baby", agency:"McCann India, Mumbai",
       category:"Health & Wellness", subcategory:"Direct – Education & Awareness", status:"shortlist",
       workLink:"https://www.youtube.com/results?search_query=Project+Golden+Minute+Pahila+Saans+Johnsons+Baby" },
-    { campaign:"Indianis Dentris", brand:"Colgate", agency:"The Refinery, Mumbai",
-      category:"Health & Wellness", subcategory:"Industry Craft: Photography", status:"shortlist",
+    { campaign:"Indianis Dentris", brand:"Colgate", agency:"Brand David & The Refinery, Mumbai",
+      category:"Health & Wellness", subcategory:"Industry Craft: Photography", status:"silver",
       workLink:"https://www.adsoftheworld.com/campaigns/indianis-dentris-india-s-newest-flower-species-8d1490a7-0043-416f-87ae-8c169f071a8f" },
     { campaign:"The Unofficial Official Sound of F1", brand:"Sting", agency:"Leo India",
-      category:"Audio & Radio", subcategory:"Challenger Brand", status:"shortlist",
+      category:"Audio & Radio", subcategory:"Challenger Brand", status:"silver",
       workLink:"https://www.youtube.com/watch?v=vQQK3t8MUwk" },
     { campaign:"From a Sanitary Pad to Basic Right", brand:"Whisper", agency:"P&G",
       category:"Creative Brand", subcategory:"Brand Positioning", status:"shortlist",
@@ -149,7 +171,7 @@ const DATA = {
       category:"Print & Publishing", subcategory:"Publications for Good", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=4dig7pLmKYM" },
     { campaign:"The Kolhapuri", brand:"Kalapuri", agency:"VML India",
-      category:"Direct", subcategory:"Use of Print/Outdoor", status:"shortlist",
+      category:"Direct", subcategory:"Cultural Engagement", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=4dig7pLmKYM" },
     { campaign:"The Slooowest Vending Machine in the World", brand:"KitKat", agency:"VML India",
       category:"Design", subcategory:"Brand Environment & Experience Design", status:"shortlist",
@@ -158,7 +180,7 @@ const DATA = {
       category:"Brand Experience & Activation", subcategory:"Customer Acquisition & Retention", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=4Ul22iIDUM4" },
     { campaign:"Sawaal Uthao", brand:"Tata 1mg", agency:"Humour Me",
-      category:"Pharma", subcategory:"Integrated – Disease Awareness", status:"shortlist",
+      category:"Pharma", subcategory:"Integrated – Disease Awareness", status:"bronze",
       workLink:"https://www.youtube.com/watch?v=zeeHd1OzrZo" },
     { campaign:"Don't Look Up", brand:"Steadfast (Fake Money Detector)", agency:"TBWA\\Lintas, Mumbai",
       category:"Film Craft", subcategory:"Script", status:"shortlist",
@@ -180,18 +202,31 @@ const DATA = {
 /* ====== END DATA BLOCK ====== */
 
 const STATUS_RANK={grand_prix:5,gold:4,silver:3,bronze:2,shortlist:1};
+const POINTS={grand_prix:10,gold:7,silver:5,bronze:3,shortlist:1};
 const fmt=d=>new Date(d).toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
 
 function agencyTally(){
   const map={};
   DATA.entries.forEach(e=>{
+    // Split only on "/" so "Brand David & The Refinery" stays as one agency
     e.agency.split("/").map(a=>a.split(",")[0].trim()).forEach(name=>{
-      if(!map[name])map[name]={shortlists:0,wins:0};
+      if(!name)return;
+      if(!map[name])map[name]={points:0,shortlists:0,wins:0,gold:0,silver:0,bronze:0,grand_prix:0};
+      map[name].points+=POINTS[e.status]||0;
       map[name].shortlists++;
-      if(e.status!=="shortlist")map[name].wins++;
+      if(e.status!=="shortlist"){map[name].wins++;map[name][e.status]++;}
     });
   });
-  return Object.entries(map).sort((a,b)=>b[1].shortlists-a[1].shortlists);
+  // sort by points, then by wins as tiebreak
+  return Object.entries(map).sort((a,b)=>(b[1].points-a[1].points)||(b[1].wins-a[1].wins));
+}
+function medalBadges(t){
+  let h="";
+  if(t.grand_prix)h+=`<span class="medal grand_prix" title="Grand Prix">${t.grand_prix}</span>`;
+  if(t.gold)h+=`<span class="medal gold" title="Gold">${t.gold}</span>`;
+  if(t.silver)h+=`<span class="medal silver" title="Silver">${t.silver}</span>`;
+  if(t.bronze)h+=`<span class="medal bronze" title="Bronze">${t.bronze}</span>`;
+  return h;
 }
 function renderStats(){
   const wins=DATA.entries.filter(e=>e.status!=="shortlist").length;
@@ -201,15 +236,24 @@ function renderStats(){
   document.getElementById("stat-agencies").textContent=ag.length;
   let leader="–";
   if(ag.length){
-    const top=ag[0][1].shortlists;
-    leader=ag.filter(a=>a[1].shortlists===top).map(a=>a[0]).join(" & ");
+    const top=ag[0][1].points;
+    leader=ag.filter(a=>a[1].points===top).map(a=>a[0]).join(" & ");
   }
   document.getElementById("stat-leader").textContent=leader;
 }
 function renderLeaderboard(){
-  document.getElementById("leaderboard").innerHTML=agencyTally().map(([n,t])=>`
-    <div class="lb-row"><span class="name">${n}</span>
-    <span class="count">${t.shortlists}${t.wins?" · 🏆"+t.wins:""}</span></div>`).join("");
+  document.getElementById("leaderboard").innerHTML=agencyTally().map(([n,t],i)=>`
+    <div class="lb-row">
+      <span class="lb-left">
+        <span class="lb-rank">#${i+1}</span>
+        <span class="name">${n}</span>
+      </span>
+      <span class="lb-right">
+        ${medalBadges(t)}
+        <span class="medal shortlist" title="Shortlists">${t.shortlists}</span>
+        <span class="pts" title="Total points">${t.points} pts</span>
+      </span>
+    </div>`).join("");
 }
 function buildFilters(){
   const cats=[...new Set(DATA.entries.map(e=>e.category))].sort();
