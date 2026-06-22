@@ -212,9 +212,13 @@ function agencyTally(){
     e.agency.split("/").map(a=>a.split(",")[0].trim()).forEach(name=>{
       if(!name)return;
       if(!map[name])map[name]={points:0,shortlists:0,wins:0,gold:0,silver:0,bronze:0,grand_prix:0};
+      // A metal replaces the shortlist point entirely — each entry scores its current status only
       map[name].points+=POINTS[e.status]||0;
-      map[name].shortlists++;
-      if(e.status!=="shortlist"){map[name].wins++;map[name][e.status]++;}
+      if(e.status==="shortlist"){
+        map[name].shortlists++;                 // counts only entries still at shortlist stage
+      }else{
+        map[name].wins++;map[name][e.status]++; // converted: no longer counted as a shortlist
+      }
     });
   });
   return Object.entries(map).sort((a,b)=>(b[1].points-a[1].points)||(b[1].wins-a[1].wins));
@@ -225,6 +229,7 @@ function medalBadges(t){
   if(t.gold)h+=`<span class="medal gold" title="Gold">${t.gold}</span>`;
   if(t.silver)h+=`<span class="medal silver" title="Silver">${t.silver}</span>`;
   if(t.bronze)h+=`<span class="medal bronze" title="Bronze">${t.bronze}</span>`;
+  if(t.shortlists)h+=`<span class="medal shortlist" title="Shortlists">${t.shortlists}</span>`;
   return h;
 }
 function renderStats(){
@@ -249,7 +254,6 @@ function renderLeaderboard(){
       </span>
       <span class="lb-right">
         ${medalBadges(t)}
-        <span class="medal shortlist" title="Shortlists">${t.shortlists}</span>
         <span class="pts" title="Total points">${t.points} pts</span>
       </span>
     </div>`).join("");
