@@ -18,7 +18,7 @@ body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:v
 .updated{color:#94a3b8;font-size:.85rem;margin-top:10px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-28px auto 32px;position:relative}
 .stat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;box-shadow:0 6px 18px rgba(0,0,0,.05)}
-.stat-card span{display:block;font-size:1.8rem;font-weight:800;color:var(--accent)}
+.stat-card span{display:block;font-size:1.6rem;font-weight:800;color:var(--accent)}
 .stat-card label{color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}
 h2{margin:36px 0 16px;font-size:1.4rem}
 .section-head{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:12px}
@@ -109,10 +109,12 @@ footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
 <script>
 /* ====== EDIT ONLY THIS DATA BLOCK TO UPDATE THE SITE ====== */
 const DATA = {
-  lastUpdated: "2026-06-21",
+  lastUpdated: "2026-06-22",
   news: [
+    { date:"2026-06-22", title:"India reaches 18 shortlists",
+      body:"KitKat's 'The Slooowest Vending Machine in the World' (VML) earns India's only new shortlist, in Brand Experience & Activation." },
     { date:"2026-06-21", title:"India surges to 17 shortlists",
-      body:"9 new shortlists added across Film Craft, Design, Direct and Media. Ogilvy India leads with 4, VML India follows with 3." },
+      body:"9 new shortlists added across Film Craft, Design, Direct and Media. Ogilvy India and VML India lead with 4 each." },
     { date:"2026-06-20", title:"India secures 8 shortlists in first wave",
       body:"Shortlists across Health & Wellness, Audio & Radio, Creative Brand, Print & Publishing and Pharma." },
     { date:"2026-06-11", title:"Subdued start for India",
@@ -152,6 +154,9 @@ const DATA = {
     { campaign:"The Slooowest Vending Machine in the World", brand:"KitKat", agency:"VML India",
       category:"Design", subcategory:"Brand Environment & Experience Design", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=4Ul22iIDUM4" },
+    { campaign:"The Slooowest Vending Machine in the World", brand:"KitKat", agency:"VML India",
+      category:"Brand Experience & Activation", subcategory:"Customer Acquisition & Retention", status:"shortlist",
+      workLink:"https://www.youtube.com/watch?v=4Ul22iIDUM4" },
     { campaign:"Sawaal Uthao", brand:"Tata 1mg", agency:"Humour Me",
       category:"Pharma", subcategory:"Integrated – Disease Awareness", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=zeeHd1OzrZo" },
@@ -180,7 +185,7 @@ const fmt=d=>new Date(d).toLocaleDateString("en-IN",{day:"numeric",month:"short"
 function agencyTally(){
   const map={};
   DATA.entries.forEach(e=>{
-    e.agency.split("/").map(a=>a.trim()).forEach(name=>{
+    e.agency.split("/").map(a=>a.split(",")[0].trim()).forEach(name=>{
       if(!map[name])map[name]={shortlists:0,wins:0};
       map[name].shortlists++;
       if(e.status!=="shortlist")map[name].wins++;
@@ -194,7 +199,12 @@ function renderStats(){
   document.getElementById("stat-shortlists").textContent=DATA.entries.length;
   document.getElementById("stat-wins").textContent=wins;
   document.getElementById("stat-agencies").textContent=ag.length;
-  document.getElementById("stat-leader").textContent=ag.length?ag[0][0].split(",")[0]:"–";
+  let leader="–";
+  if(ag.length){
+    const top=ag[0][1].shortlists;
+    leader=ag.filter(a=>a[1].shortlists===top).map(a=>a[0]).join(" & ");
+  }
+  document.getElementById("stat-leader").textContent=leader;
 }
 function renderLeaderboard(){
   document.getElementById("leaderboard").innerHTML=agencyTally().map(([n,t])=>`
