@@ -131,6 +131,8 @@ footer{padding:30px 0;color:var(--muted);font-size:.85rem;text-align:center}
 const DATA = {
   lastUpdated: "2026-06-22",
   news: [
+    { date:"2026-06-22", title:"India climbs to 21 shortlists",
+      body:"3 more added: Ogilvy India's 'Eye Test Menu' (Titan Eye+) earns two in Creative Strategy; Leo India's 'Gamers on Duty' (Lenovo) lands one in Creative Commerce." },
     { date:"2026-06-22", title:"India opens with 4 Lions on Day 1 🦁",
       body:"2 Silver (Indianis Dentris – Brand David & The Refinery; Sound of F1 – Leo India) and 2 Bronze (Renu vs The City – Ogilvy; Sawaal Uthao – Humour Me). Day 2 brings Film Craft & Design." },
     { date:"2026-06-22", title:"India reaches 18 shortlists",
@@ -149,6 +151,12 @@ const DATA = {
     { campaign:"Renu vs The City", brand:"St. Jude India Childcare Centres", agency:"Ogilvy India, Mumbai",
       category:"Film Craft", subcategory:"Casting", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=MB-2bbn3xUE" },
+    { campaign:"Eye Test Menu", brand:"Titan Eye+", agency:"Ogilvy India, Bangalore",
+      category:"Creative Strategy", subcategory:"Corporate Purpose & Social Responsibility", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Titan+Eye+Eye+Test+Menu+Ogilvy" },
+    { campaign:"Eye Test Menu", brand:"Titan Eye+", agency:"Ogilvy India, Bangalore",
+      category:"Creative Strategy", subcategory:"Products/Services", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Titan+Eye+Eye+Test+Menu+Ogilvy" },
     { campaign:"Ek Tara Project", brand:"Titan Eye+", agency:"Ogilvy India, Bangalore",
       category:"Health & Wellness", subcategory:"Brand Experience & Activation", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=HhxTgdjCLOo" },
@@ -164,9 +172,12 @@ const DATA = {
     { campaign:"The Unofficial Official Sound of F1", brand:"Sting", agency:"Leo India",
       category:"Audio & Radio", subcategory:"Challenger Brand", status:"silver",
       workLink:"https://www.youtube.com/watch?v=vQQK3t8MUwk" },
-    { campaign:"From a Sanitary Pad to Basic Right", brand:"Whisper", agency:"P&G",
+    { campaign:"Gamers on Duty", brand:"Lenovo", agency:"Leo India",
+      category:"Creative Commerce", subcategory:"Creative Commerce", status:"shortlist",
+      workLink:"https://www.youtube.com/results?search_query=Lenovo+Gamers+on+Duty+Leo+India" },
+    { campaign:"From a Sanitary Pad to a Basic Right", brand:"Whisper", agency:"P&G",
       category:"Creative Brand", subcategory:"Brand Positioning", status:"shortlist",
-      workLink:"https://www.youtube.com/results?search_query=Whisper+From+a+Sanitary+Pad+to+Basic+Right" },
+      workLink:"https://www.youtube.com/results?search_query=Whisper+From+a+Sanitary+Pad+to+a+Basic+Right" },
     { campaign:"The Kolhapuri", brand:"Kalapuri", agency:"VML India",
       category:"Print & Publishing", subcategory:"Publications for Good", status:"shortlist",
       workLink:"https://www.youtube.com/watch?v=4dig7pLmKYM" },
@@ -208,16 +219,14 @@ const fmt=d=>new Date(d).toLocaleDateString("en-IN",{day:"numeric",month:"short"
 function agencyTally(){
   const map={};
   DATA.entries.forEach(e=>{
-    // Split only on "/" so "Brand David & The Refinery" stays as one agency
     e.agency.split("/").map(a=>a.split(",")[0].trim()).forEach(name=>{
       if(!name)return;
       if(!map[name])map[name]={points:0,shortlists:0,wins:0,gold:0,silver:0,bronze:0,grand_prix:0};
-      // A metal replaces the shortlist point entirely — each entry scores its current status only
       map[name].points+=POINTS[e.status]||0;
       if(e.status==="shortlist"){
-        map[name].shortlists++;                 // counts only entries still at shortlist stage
+        map[name].shortlists++;
       }else{
-        map[name].wins++;map[name][e.status]++; // converted: no longer counted as a shortlist
+        map[name].wins++;map[name][e.status]++;
       }
     });
   });
